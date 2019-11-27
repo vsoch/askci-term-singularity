@@ -67,8 +67,8 @@ create_pull_request() {
         echo "curl --user ${GITHUB_ACTOR} -X POST --data ${DATA} ${PULLS_URL}"
         curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --user "${GITHUB_ACTOR}" -X POST --data "${DATA}" ${PULLS_URL}
         response=$?
-        echo $response
         echo $response > PR_RESPONSE.json
+        cat PR_RESPONSE.json
     fi
 }
 
@@ -99,7 +99,7 @@ main () {
 }
 
 echo "==========================================================================
-START: Creating Membership Count Update Pull Request!";
+START: Creating Review Request Pull Request!";
 main;
 echo "==========================================================================
 END: Finished";
