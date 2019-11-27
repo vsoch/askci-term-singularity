@@ -44,10 +44,12 @@ jobs:
             URL=$(jq --raw-output .url "PR_RESPONSE.json");
             TITLE=$(jq --raw-output .title "PR_RESPONSE.json");
             PR_ID=$(jq --raw-output .client_payload.id "${GITHUB_EVENT_PATH}");
+            ARTICLE=$(jq --raw-output .client_payload.article "${GITHUB_EVENT_PATH}");
             BRANCH=$(jq --raw-output .head.ref PR_RESPONSE.json);
             REQUEST_USER=$USERNAME
             OWNER=${GITHUB_ACTOR}
             echo $URL
+            echo $ARTICLE
             echo $BRANCH
             echo $TITLE
             echo $PR_ID
