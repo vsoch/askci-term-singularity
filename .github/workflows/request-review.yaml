@@ -1,4 +1,4 @@
-name: Request Review
+name: request-review
 
 on: [repository_dispatch]
 
