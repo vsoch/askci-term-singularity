@@ -10,33 +10,32 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v1
-    - name: Check Payload
+    - name: Update README.md
       run: |
-        echo ${GITHUB_EVENT_PATH}
         jq --raw-output .client_payload.markdown "${GITHUB_EVENT_PATH}" > README.md
         cat README.md
-        USERNAME=$(jq --raw-output .client_payload.username "${GITHUB_EVENT_PATH}"); 
-        echo "Requested by: $USERNAME"
     - name: Checkout New Branch
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        USERNAME=$(jq --raw-output .client_payload.username "${GITHUB_EVENT_PATH}");
+        echo "Requested by ${USERNAME}"
         echo "GitHub Actor: ${GITHUB_ACTOR}"
         git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
         git branch
-        git checkout -b update/term-$(date '+%Y-%m-%d')
+        git checkout -b update/term-${USERNAME}-$(date '+%Y-%m-%d')
         git branch
 
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@users.noreply.github.com"
 
-        #git add _data/memberCounts.csv
-        #git commit -m "Automated deployment to update Member Counts $(date '+%Y-%m-%d')" --allow-empty
-        #git push origin update/member-count-$(date '+%Y-%m-%d')
+        git commit -m "Request review of term by $USERNAME $(date '+%Y-%m-%d')" --allow-empty
+        git push origin update/term-${USERNAME}-$(date '+%Y-%m-%d')
     - name: Open pull request
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH_AGAINST: "master"
       run: |
-          export BRANCH_FROM="update/term-$(date '+%Y-%m-%d')"
+          USERNAME=$(jq --raw-output .client_payload.username "${GITHUB_EVENT_PATH}");
+          export BRANCH_FROM=update/term-${USERNAME}-$(date '+%Y-%m-%d')"
           /bin/bash .github/workflows/pull-request.sh
