@@ -12,12 +12,11 @@ jobs:
       uses: actions/checkout@v1
     - name: Check Payload
       run: |
-        sudo apt-get update
-        MARKDOWN=$(jq --raw-output .client_payload .markdown "${GITHUB_EVENT_PATH}");        
-        echo $MARKDOWN
-        USERNAME=$(jq --raw-output .client_payload .username "${GITHUB_EVENT_PATH}");        
-        echo $USERNAME
-        echo ${MARKDOWN} > README.md
+        echo ${GITHUB_EVENT_PATH}
+        jq --raw-output .client_payload.markdown "${GITHUB_EVENT_PATH}" > README.md
+        cat README.md
+        USERNAME=$(jq --raw-output .client_payload.username "${GITHUB_EVENT_PATH}"); 
+        echo "Requested by: $USERNAME"
     - name: Checkout New Branch
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
