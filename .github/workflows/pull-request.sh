@@ -49,8 +49,8 @@ create_pull_request() {
     TARGET="${2}"  # pull request TO this target
 
     # Check if the branch already has a pull request open
-    TITLE='Updating Membership Counts'
-    BODY='This is a pull request to update membership counts for usrse.'
+    TITLE='Request for Term Update Review'
+    BODY='This is a pull request to request review for changes to the term README.md.'
     DATA="{\"base\":\"${TARGET}\", \"head\":\"${SOURCE}\", \"body\":\"${BODY}\"}"
     RESPONSE=$(curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --user "${GITHUB_ACTOR}" -X GET --data "${DATA}" ${PULLS_URL})
     PR=$(echo "${RESPONSE}" | jq --raw-output '.[] | .head.ref')
@@ -66,7 +66,9 @@ create_pull_request() {
         DATA="{\"title\":\"${TITLE}\", \"base\":\"${TARGET}\", \"head\":\"${SOURCE}\", \"body\":\"${BODY}\"}"
         echo "curl --user ${GITHUB_ACTOR} -X POST --data ${DATA} ${PULLS_URL}"
         curl -sSL -H "${AUTH_HEADER}" -H "${HEADER}" --user "${GITHUB_ACTOR}" -X POST --data "${DATA}" ${PULLS_URL}
-        echo $?
+        response=$?
+        echo $response
+        echo $response > PR_RESPONSE.json
     fi
 }
 
