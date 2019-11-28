@@ -44,17 +44,19 @@ jobs:
             URL=$(jq --raw-output .url "PR_RESPONSE.json");
             TITLE=$(jq --raw-output .title "PR_RESPONSE.json");
             PR_ID=$(jq --raw-output .client_payload.id "${GITHUB_EVENT_PATH}");
+            RESPONSE_URL=$(jq --raw-output .client_payload.url "${GITHUB_EVENT_PATH}");
             ARTICLE=$(jq --raw-output .client_payload.article "${GITHUB_EVENT_PATH}");
             BRANCH=$(jq --raw-output .head.ref PR_RESPONSE.json);
             REQUEST_USER=$USERNAME
             OWNER=${GITHUB_ACTOR}
-            echo $URL
-            echo $ARTICLE
-            echo $BRANCH
-            echo $TITLE
-            echo $PR_ID
-            echo $REQUEST_USER
-            echo $OWNER
-            # TODO: if the url isn't localhost or 127.0.0.1 (development) then
-            # do post back to url to update server with PR.
+            # if the url is not localhost or 127.0.0.1, send update to callback url
+            if [[ $RESPONSE_URL != *"localhost"* ]] && [[ $RESPONSE_URL != *"127.0.0.1"* ]]; then
+                AUTH_HEADER="Authorization: Bearer ${PR_ID}"
+                DATA="{\"article\":\"${ARTICLE}\", \"branch\":\"${BRANCH}\", \"title\":\"${TITLE}\", \"owner\":\"${OWNER}\", \"user\":\"${REQUEST_USER}\",  \"url\":\"${URL}\"}"
+                curl -sSL -H "${AUTH_HEADER}" -H "User-Agent: AskCI" --user "${GITHUB_ACTOR}" -X POST --data "${DATA}" ${RESPONSE_URL} -o ASKCI_RESPONSE.json
+                echo $?
+                cat ASKCI_RESPONSE.json
+            else
+                echo "Development server, skip sending response."
+            fi
           fi
