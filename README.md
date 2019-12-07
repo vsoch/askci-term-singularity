@@ -48,12 +48,13 @@ Once you build your container you can transfer the `my_container.sif` file to th
 
  - [Using Singularity on an HPC Cluster](https://github.com/bdusell/singularity-tutorial) <span id='question-how-do-i-use-singularity-on-an-hpc-cluster'> This tutorial is for using Singularity on the CRC computing cluster at the University of Notre Dame, which uses the SGE job scheduling system. It serves as a general introduction to containers and may be applicable to other computing clusters as well. The tutorial walks you through the process of building a container and running a GPU-accelerated PyTorch program on a GPU node. It also has tips for managing Python packages efficiently.
  - [Harvard Using Singularity on Odyssey](https://www.rc.fas.harvard.edu/resources/documentation/software/singularity-on-odyssey/): a tutorial for using SBATCH or an interactive session with slurm to build containers.
-
+- [Using Singularity](https://www.osc.edu/resources/getting_started/howto/howto_use_docker_and_singularity_containers_at_osc):  at the Ohio Supercomputing Center
 
 ## References
 
  - [Sylabs User Guide](https://sylabs.io/guides/latest/user-guide/)
  - [Singularity on GitHub](https://github.com/sylabs/singularity)
+
 
 
 
