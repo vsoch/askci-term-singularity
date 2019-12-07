@@ -55,7 +55,3 @@ Once you build your container you can transfer the `my_container.sif` file to th
  - [Sylabs User Guide](https://sylabs.io/guides/latest/user-guide/)
  - [Singularity on GitHub](https://github.com/sylabs/singularity)
 
-
-
-
-
