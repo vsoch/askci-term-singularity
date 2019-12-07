@@ -3,7 +3,7 @@
 
 ## Definition
 
-A [Singularity](https://sylabs.io/singularity/) container is a linux container optimized for HPC workloads. <span id="how-was-singularity-started"></span> It was started in 2016 at Lawrence Berkeley National Labs.
+A [Singularity](https://sylabs.io/singularity/) container is a linux container optimized for HPC workloads. <span id="question-how-was-singularity-started"></span> It was started in 2016 at Lawrence Berkeley National Labs.
 
 ## History
 
