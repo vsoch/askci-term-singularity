@@ -10,9 +10,9 @@ A [Singularity](https://sylabs.io/singularity/) container is a linux container o
 
 ### Build from Docker
 
-<span id='question-why-cant-docker-be-used-on-hpc'> Docker is not used on many HPC sites due to security concerns. That is primarily because Docker can be misused by a regular user to obtain superuser access. However, alternative container runtimes do exist which try to avoid the security issue and offer similar features. As an added bonus they usually support importing existing Docker images. Conversion of images becomes trivial.
+<span id='question-why-cant-docker-be-used-on-hpc'></span> Docker is not used on many HPC sites due to security concerns. That is primarily because Docker can be misused by a regular user to obtain superuser access. However, alternative container runtimes do exist which try to avoid the security issue and offer similar features. As an added bonus they usually support importing existing Docker images. Conversion of images becomes trivial.
 
-<span id='question-how-do-i-convert-from-docker-to-singularity'>Docker containers can be imported to Singularity, meaning that the Docker manifest is obtained to download the layers, and the layers are built into a Singularity binary. You would first want to make sure that your cluster supports Singularity, meaning that it's installed:
+<span id='question-how-do-i-convert-from-docker-to-singularity'></span>Docker containers can be imported to Singularity, meaning that the Docker manifest is obtained to download the layers, and the layers are built into a Singularity binary. You would first want to make sure that your cluster supports Singularity, meaning that it's installed:
 
 ```bash
 which singularity
@@ -35,7 +35,7 @@ singularity exec salad_latest.sif echo "hello!"
 
 There are a few important points to make. The user that you are outside the container is the same as within, so if the Docker container is built with content in root's home (/root) or needing a root permission, you won't be able to do this. If you find you are running into trouble, take a look at the Dockerfile and see if you can figure out why. If it comes down to permissions, you can push your own container to Docker Hub to pull as you just did above.
 
-<span id='question-how-do-i-build-from-a-local-docker-daemon'>With recent singularity version 3.x and greater, you can also build directly from a local docker daemon. If I had a docker container image tagged as `my_container:latest` on my local computer, I would build from it as follows:
+<span id='question-how-do-i-build-from-a-local-docker-daemon'></span>With recent singularity version 3.x and greater, you can also build directly from a local docker daemon. If I had a docker container image tagged as `my_container:latest` on my local computer, I would build from it as follows:
 
 ``` bash
 singularity build my_container.sif docker-daemon://my_container:latest
@@ -57,9 +57,5 @@ Once you build your container you can transfer the `my_container.sif` file to th
 
  - [Sylabs User Guide](https://sylabs.io/guides/latest/user-guide/)
  - [Singularity on GitHub](https://github.com/sylabs/singularity)
-
-
-
-
 
 
