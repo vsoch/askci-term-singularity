@@ -7,7 +7,10 @@ A [Singularity](https://sylabs.io/singularity/) container is a linux container o
 
 ## Usage
 
-### Docker
+
+### Build from Docker
+
+<span id='question-why-cant-docker-be-used-on-hpc'> Docker is not used on many HPC sites due to security concerns. That is primarily because Docker can be misused by a regular user to obtain superuser access. However, alternative container runtimes do exist which try to avoid the security issue and offer similar features. As an added bonus they usually support importing existing Docker images. Conversion of images becomes trivial.
 
 <span id='question-how-do-i-convert-from-docker-to-singularity'>Docker containers can be imported to Singularity, meaning that the Docker manifest is obtained to download the layers, and the layers are built into a Singularity binary. You would first want to make sure that your cluster supports Singularity, meaning that it's installed:
 
@@ -54,6 +57,7 @@ Once you build your container you can transfer the `my_container.sif` file to th
 
  - [Sylabs User Guide](https://sylabs.io/guides/latest/user-guide/)
  - [Singularity on GitHub](https://github.com/sylabs/singularity)
+
 
 
 
