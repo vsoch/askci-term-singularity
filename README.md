@@ -7,6 +7,11 @@ A [Singularity](https://sylabs.io/singularity/) container is a linux container o
 
 ## Usage
 
+### Run A Container
+
+```bash
+singularity run <container>
+```
 
 ### Build from Docker
 
@@ -89,6 +94,7 @@ Once you build your container you can transfer the `my_container.sif` file to th
 
  - [Sylabs User Guide](https://sylabs.io/guides/latest/user-guide/)
  - [Singularity on GitHub](https://github.com/sylabs/singularity)
+
 
 
 
